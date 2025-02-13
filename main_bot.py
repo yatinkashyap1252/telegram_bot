@@ -8,6 +8,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 load_dotenv()
 
 TOKEN=os.getenv("TOKEN")
+COOKIES_PATH = os.getenv("YT_COOKIES", "youtube_cookies.txt")
 
 def extract_download_url(url, format_type):
     options = {
@@ -15,6 +16,7 @@ def extract_download_url(url, format_type):
         'format': 'bestaudio' if format_type == 'audio' else 'best',
         'noplaylist': True,
         'extract_flat': True,
+        'cookies': 'youtube_cookies.txt',
     }
     try:
         with yt_dlp.YoutubeDL(options) as ydl:
